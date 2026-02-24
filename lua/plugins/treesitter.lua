@@ -40,6 +40,8 @@ return {
             "gowork",
             "julia",
             "bibtex",
+            "bash",
+            "regex",
         },
         sync_install = false,
         highlight = { enable = true },
