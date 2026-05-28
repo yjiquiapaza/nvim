@@ -1,8 +1,4 @@
--- setlocal textwidth=71
--- setlocal fo+=aw
-vim.cmd('setlocal wrap')
-vim.cmd('setlocal  linebreak')
---vi.cmd('setlocal colorcolumn=120')
---vim.cmd('setlocal textwidth = 120')
---vim.opt.textwidth = 120
---vim.cmd('setlocal list!')
+vim.opt_local.textwidth = 80
+vim.opt_local.wrap = true
+vim.opt_local.linebreak = true
+vim.opt_local.colorcolumn = "80"
