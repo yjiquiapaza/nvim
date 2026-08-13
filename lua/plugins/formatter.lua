@@ -6,6 +6,19 @@ return {
     },
     config = function()
         local util = require "formatter.util"
+
+        local biome = function()
+            return {
+                exe = "biome",
+                args = {
+                    "format",
+                    "--stdin-file-path",
+                    util.escape_path(util.get_current_buffer_file_path()),
+                },
+                stdin = true,
+            }
+        end
+
         require("formatter").setup {
             loggin = true,
             log_level = vim.log.levels.WARN,
@@ -32,13 +45,7 @@ return {
                         }
                     end,
                 },
-                astro = {
-                    function()
-                        return {
-                            exe = "npx @biomejs/biome format --write ./src",
-                        }
-                    end,
-                },
+                astro = { biome },
                 javascript = {
                     require("formatter.filetypes.javascript").prettier(),
                 },
