@@ -1,5 +1,5 @@
--- Telescope
 
+-- Telescope
 -- vim.api.nvim_set_keymap("n", "<space>fb", ":Telescope file_browser<CR>", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "<space>ff", ":Telescope find_files<CR>", { noremap = true })
 -- Trouble

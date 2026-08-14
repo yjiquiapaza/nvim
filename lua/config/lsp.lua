@@ -27,8 +27,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
         -- Show documentation for what is under cursor
-        opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        -- opts.desc = "Show documentation for what is under cursor"
+        -- keymap.set("n", "K", vim.lsp.buf.hover, opts)
     end,
 })
 
