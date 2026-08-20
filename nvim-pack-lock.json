@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "LuaSnip": {
+      "rev": "03c8e67eb7293c404845b3982db895d59c0d1538",
+      "src": "https://github.com/L3MON4D3/LuaSnip",
+      "version": "'v2.3.0'"
+    },
     "base16-nvim": {
       "rev": "09944b3120451d2881dc8cfb13c85c11949f477d",
       "src": "https://github.com/RRethy/base16-nvim"
@@ -15,6 +20,22 @@
     "mini.icons": {
       "rev": "98faae31e9be1cc054ae63485e58ceb185efcad0",
       "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "noice.nvim": {
+      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
+      "src": "https://github.com/folke/noice.nvim"
+    },
+    "nui.nvim": {
+      "rev": "10fc361835c856ba4233ef5ea135b919bf3dce97",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-notify": {
+      "rev": "8701bece920b38ea289b457f902e2ad184131a5d",
+      "src": "https://github.com/rcarriga/nvim-notify"
+    },
+    "trouble.nvim": {
+      "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
+      "src": "https://github.com/folke/trouble.nvim"
     }
   }
 }

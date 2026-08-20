@@ -5,6 +5,11 @@ vim.pack.add {
     { src = github .. "RRethy/base16-nvim" },
     { src = github .. "nvim-lualine/lualine.nvim" },
     { src = github .. "nvim-mini/mini.icons" },
+    { src = github .. "rcarriga/nvim-notify" },
+    { src = github .. "L3MON4D3/LuaSnip", version = "v2.3.0" },
+    { src = github .. "folke/trouble.nvim" },
+    { src = github .. "folke/noice.nvim" },
+    { src = github .. "MunifTanjim/nui.nvim" },
 }
 
 local pack_dir = vim.fn.stdpath "config" .. "/lua/config/pack"

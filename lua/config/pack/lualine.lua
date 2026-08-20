@@ -2,7 +2,7 @@ local opts = {
     options = {
         theme = "base16",
         component_separators = { left = "", right = "" },
-        section_separatos = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disable_filetypes = {
             statusline = {},
             winbar = {},
@@ -20,7 +20,17 @@ local opts = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename" },
-        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_x = {
+            {
+                function()
+                    local ok, status = pcall(vim.ui.progress_status)
+                    return (ok and status) or ""
+                end,
+            },
+            "encoding",
+            "fileformat",
+            "filetype",
+        },
         lualine_y = { "progress" },
         lualine_z = { "location" },
     },
@@ -40,7 +50,7 @@ local opts = {
 
 local ok, trouble = pcall(require, "trouble")
 if ok then
-    local symbols = trouble.statusline({
+    local symbols = trouble.statusline {
         mode = "lsp_document_symbols",
         groups = {},
         title = false,
@@ -48,14 +58,23 @@ if ok then
         format = "{kind_icon}{symbol.name:Normal}",
         -- Necesario para que el fondo coincida con la sección de lualine
         hl_group = "lualine_c_normal",
-    })
+    }
     table.insert(opts.sections.lualine_c, {
         symbols.get,
         cond = symbols.has,
     })
 else
-    vim.api.nvim_echo({ { "lualine: no se pudo cargar trouble.nvim, símbolos LSP desactivados", "ErrorMsg" } }, true, { err = true })
+    vim.api.nvim_echo(
+        { { "lualine: Could not load trouble.nvim, LSP symbols disable", "ErrorMsg" } },
+        true,
+        { err = true }
+    )
 end
 
 require("lualine").setup(opts)
 
+vim.api.nvim_create_autocmd("LspProgress", {
+    callback = function()
+        vim.cmd.redrawstatus()
+    end,
+})
