@@ -1,3 +1,6 @@
+vim.pack.add({
+        { src = "https://github.com/rcarriga/nvim-notify" },
+})
 ---@diagnostic disable-next-line: missing-fields
 require("notify").setup {
     background_colour = "Normal",

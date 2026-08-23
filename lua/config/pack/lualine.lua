@@ -1,3 +1,7 @@
+vim.pack.add {
+    { src = "https://github.com/nvim-lualine/lualine.nvim" },
+}
+
 local opts = {
     options = {
         theme = "base16",
@@ -9,7 +13,7 @@ local opts = {
         },
         ignore_focus = {},
         always_divide_middle = true,
-        globalstatus = false,
+        globalstatus = true,
         refresh = {
             statusline = 1000,
             tabline = 1000,

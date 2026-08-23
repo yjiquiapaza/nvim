@@ -1,3 +1,7 @@
+vim.pack.add({
+        { src = "https://github.com/L3MON4D3/LuaSnip", version = "v2.3.0" },
+})
+
 local ls = require "luasnip"
 local s = ls.snippet
 local i = ls.insert_node

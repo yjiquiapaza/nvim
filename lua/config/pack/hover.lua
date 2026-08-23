@@ -1,3 +1,7 @@
+vim.pack.add {
+    { src = "https://github.com/lewis6991/hover.nvim" },
+}
+
 require("hover").config {
     providers = {
         "hover.providers.diagnostic",
