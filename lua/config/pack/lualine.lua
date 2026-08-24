@@ -1,5 +1,6 @@
 vim.pack.add {
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
+    { src = "https://github.com/nvim-mini/mini.icons" },
 }
 
 local opts = {
@@ -51,29 +52,6 @@ local opts = {
     inactive_winbar = {},
     extensions = {},
 }
-
-local ok, trouble = pcall(require, "trouble")
-if ok then
-    local symbols = trouble.statusline {
-        mode = "lsp_document_symbols",
-        groups = {},
-        title = false,
-        filter = { range = true },
-        format = "{kind_icon}{symbol.name:Normal}",
-        -- Necesario para que el fondo coincida con la sección de lualine
-        hl_group = "lualine_c_normal",
-    }
-    table.insert(opts.sections.lualine_c, {
-        symbols.get,
-        cond = symbols.has,
-    })
-else
-    vim.api.nvim_echo(
-        { { "lualine: Could not load trouble.nvim, LSP symbols disable", "ErrorMsg" } },
-        true,
-        { err = true }
-    )
-end
 
 require("lualine").setup(opts)
 
