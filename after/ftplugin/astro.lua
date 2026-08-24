@@ -1,4 +1,4 @@
-vim.cmd('setlocal tabstop=2')
-vim.cmd('setlocal shiftwidth=2')
-vim.cmd('setlocal softtabstop=2')
-vim.cmd('setlocal expandtab')
+vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.expandtab = true

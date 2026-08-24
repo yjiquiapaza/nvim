@@ -58,3 +58,4 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", extends = "›", prec
 vim.api.nvim_set_hl(0, "Cursor", { bg = "#bb9af7" })
 opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr:hor20,o:hor50"
 
+vim.opt.completeopt = { "menu", "menuone", "noselect" }

@@ -1,63 +1,56 @@
-vim.pack.add({
-        { src = "https://github.com/L3MON4D3/LuaSnip", version = "v2.3.0" },
-})
+-- ~/.config/nvim/lua/config/pack/luasnip.lua
+--
+-- Solo LuaSnip acá -- instalación, setup, loaders de snippets, y el
+-- keymap que es exclusivamente suyo (ciclar choice_node). Los keymaps
+-- Tab/S-Tab (que combinan LuaSnip + cmp) viven en nvim-cmp.lua, porque
+-- necesitan las dos cosas.
+--
+-- Los snippets propios en sí NO van acá -- viven en
+-- ~/.config/nvim/luasnippets/markdown/*.lua (date.lua, litnote.lua, etc.),
+-- cada uno con `return { s(...) }`.
+
+vim.pack.add {
+    { src = "https://github.com/L3MON4D3/LuaSnip", version = "v2.5.0" },
+    { src = "https://github.com/rafamadriz/friendly-snippets" },
+}
 
 local ls = require "luasnip"
-local s = ls.snippet
-local i = ls.insert_node
-local fmt = require("luasnip.extras.fmt").fmt
+local types = require "luasnip.util.types"
 
-ls.add_snippets("markdown", {
-    s(
-        {
-            trig = "paper note template",
-            name = "Research paper's metadata",
-            dscr = "Template of header paper, We use it to get all metadata for research paper.",
+ls.setup {
+    history = true,
+    update_events = "TextChanged,TextChangedI",
+    delete_check_events = "TextChanged",
+    ext_opts = {
+        [types.choiceNode] = {
+            active = {
+                virt_text = { { "choiceNode", "Comment" } },
+            },
         },
-        fmt(
-            [[
-            ---
-            Title: {}
-            Source (URL or DOI): {}
-            Tags: {}
-            Event: {}
-            Target: {}
-            Read: {}
-            ---
+    },
+    ext_base_prio = 300,
+    ext_prio_increase = 1,
+    enable_autosnippets = true,
+    store_selection_keys = "<Tab>",
+    ft_func = function()
+        return vim.split(vim.bo.filetype, ".", { plain = true })
+    end,
+}
 
-            # Main Idea
+-- Loader de tus snippets propios: ruta explícita, no depende del escaneo
+-- automático de runtimepath (en Windows a veces falla). .load() en vez de
+-- .lazy_load() porque el disparo perezoso por FileType no era confiable.
+require("luasnip.loaders.from_lua").load {
+    paths = vim.fn.stdpath "config" .. "/luasnippets",
+}
 
+-- friendly-snippets viene en formato VSCode -- necesita su propio loader.
+require("luasnip.loaders.from_vscode").load()
 
-            ## Experiment or Use Cases
-
-
-            ## Quotes
-
-        ]],
-            {
-                i(1, "Research paper title"),
-                i(2, "URL or DOI"),
-                i(3, "Tags, for example Visualization, Data Analysis, AR, VR, Interaction, etc."),
-                i(4, "Event, is where the research paper was published"),
-                i(5, "Target, is where we want to publish our research paper"),
-                i(6, "Read, is the number of times the paper has been read"),
-            }
-        )
-    ),
-})
-
-ls.add_snippets("markdown", {
-    s(
-        {
-            trig = "review",
-            name = "Peer-review",
-            dscr = "Peer-review Template: metadata, criteria-based evaluation, strenghs/weeknesses, and recomendations",
-        },
-        fmt(
-            [[
-# Peer-review Template
-        ]],
-            {}
-        )
-    ),
-})
+-- Ciclar entre opciones de un choice_node (ninguno de tus snippets lo usa
+-- todavía, pero queda listo para cuando agregues uno).
+vim.keymap.set("i", "<C-l>", function()
+    if ls.choice_active() then
+        ls.change_choice(1)
+    end
+end, { silent = true, desc = "LuaSnip: siguiente opción" })
