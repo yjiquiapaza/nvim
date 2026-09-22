@@ -50,6 +50,10 @@ local core_languages = {
     "regex",
     "markdown",
     "markdown_inline",
+    "r",
+    "csv",
+    "rnoweb",
+    "typst",
 }
 
 -- En Windows, sacamos markdown/markdown_inline de la lista auto-instalable

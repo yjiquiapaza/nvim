@@ -16,6 +16,7 @@ require("conform").setup {
         typescript = { "biome" },
         json = { "biome" },
         vue = { "biome" },
+        r = { "air" },
         -- Conform corre estos tres en secuencia, igual que en formatter.nvim
         go = { "gofumpt", "goimports-reviser", "golines" },
         -- Equivalente al ["*"] de formatter.nvim: solo aplica a filetypes
